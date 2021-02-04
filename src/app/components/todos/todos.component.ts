@@ -9,6 +9,8 @@ import { Todo } from './../../models/Todo';
 export class TodosComponent implements OnInit {
   todos: Todo[];
 
+  inputTodo: string = '';
+
   constructor() {}
 
   ngOnInit(): void {
@@ -24,7 +26,7 @@ export class TodosComponent implements OnInit {
     ];
   }
 
-  toggleDone(id:number) {
+  toggleDone(id: number) {
     this.todos.map((val, i) => {
       if (i == id) val.completed = !val.completed;
 
@@ -32,7 +34,15 @@ export class TodosComponent implements OnInit {
     });
   }
 
-  deleteTodo (id:number) {
-    this.todos = this.todos.filter((val, i) => i !== id)
+  deleteTodo(id: number) {
+    this.todos = this.todos.filter((val, i) => i !== id);
+  }
+
+  addTodo() {
+    this.todos.push({
+      content: this.inputTodo,
+      completed: false,
+    });
+    this.inputTodo = ""
   }
 }
