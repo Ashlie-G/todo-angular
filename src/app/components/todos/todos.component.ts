@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Todo} from './../../models/Todo'
+import { Todo } from './../../models/Todo';
 
 @Component({
   selector: 'app-todos',
@@ -7,8 +7,7 @@ import {Todo} from './../../models/Todo'
   styleUrls: ['./todos.component.css'],
 })
 export class TodosComponent implements OnInit {
-  
-  todos:Todo[]
+  todos: Todo[];
 
   constructor() {}
 
@@ -16,13 +15,24 @@ export class TodosComponent implements OnInit {
     this.todos = [
       {
         content: 'First todo',
-        completed: false
+        completed: false,
       },
       {
         content: 'Second todo',
-        completed: true
-      }
-    ]
+        completed: false,
+      },
+    ];
   }
 
+  toggleDone(id:number) {
+    this.todos.map((val, i) => {
+      if (i == id) val.completed = !val.completed;
+
+      return val;
+    });
+  }
+
+  deleteTodo (id:number) {
+    this.todos = this.todos.filter((val, i) => i !== id)
+  }
 }
